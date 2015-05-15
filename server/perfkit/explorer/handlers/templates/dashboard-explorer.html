@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="explorer">
+<head>
+  <title>Perfkit Explorer - {{ explorerCtrl.dashboard.current.model.title }}</title>
+
+  <!-- JQuery & Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-mocks.js"></script>
+
+  <!-- AngularUI Grid -->
+  <script src="/static/third_party/uiGrid/ui-grid.js"></script>
+  <link href="/static/third_party/uiGrid/ui-grid.css" rel="stylesheet">
+
+  <!-- CodeMirror3 Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/sql/sql.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css" rel="stylesheet">
+
+  <!-- Angular Material Design -->
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" />
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+
+  <script>
+    // Initialize Google Visualizations.
+    try {
+      google.load('visualization', '1.1', {packages: [
+        'corechart', 'charteditor', 'calendar', 'geochart', 'sankey']});
+    } catch (err) { }
+
+    // Initialize starting values.
+    var CURRENT_USER_EMAIL = '[[current_user_email]]';
+    var CURRENT_USER_ADMIN = [[current_user_admin]];
+    [% autoescape false %]
+    var INITIAL_CONFIG =  [[initial_config]];
+    [% endautoescape %]
+  </script>
+
+  <!-- Perfkit -->
+  <script src="[[static_dir]]/perfkit_templates.js"></script>
+  <script src="[[static_dir]]/perfkit_scripts.js"></script>
+  <link type="text/css" rel="stylesheet" href="[[static_dir]]/perfkit_styles.css" />
+</head>
+<body>
+
+  <explorer-page />
+
+</body>
+</html>

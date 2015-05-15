@@ -6,52 +6,50 @@
  * https://developers.google.com/open-source/licenses/bsd
  *
  * @fileoverview ExplorerPageDirective encapsulates HTML, style and behavior
- *     for the Explorer page and dashboard layout.  Although future work will
- *     encapsulate layout into a dedicated component, this directive currently
- *     maintains the resizing behavior in addition to other state.
+ *     for the Explorer page and dashboard layout.
  * @author joemu@google.com (Joe Allan Muharsky)
  */
 
 goog.provide('p3rf.perfkit.explorer.components.explorer.ExplorerPageDirective');
-
-goog.require('p3rf.perfkit.explorer.components.explorer.ExplorerService');
-goog.require('p3rf.perfkit.explorer.components.layout.ResizeService');
+goog.provide('p3rf.perfkit.explorer.components.explorer.module');
 
 
 goog.scope(function() {
-var explorer = p3rf.perfkit.explorer;
+
+const explorer = p3rf.perfkit.explorer;
 
 
 /**
  * See module docstring for more information about purpose and usage.
  *
  * @return {Object} Directive definition object.
+ * @ngInject
+ * @export
  */
-explorer.components.explorer.ExplorerPageDirective = function(
-    resizeService, explorerService) {
+explorer.components.explorer.ExplorerPageDirective = function() {
   return {
     restrict: 'E',
     replace: true,
-    transclude: true,
+    transclude: false,
     templateUrl: '/static/components/explorer/explorer-page-directive.html',
     controllerAs: 'pageCtrl',
-    controller: function($scope) {
-    },
-    link: function(scope, element, attr) {
-      element.on('mouseup', angular.bind(this, function(event) {
-        if (resizeService.isResizing) {
-          resizeService.endResize();
-        }
-        scope.$apply();
-      }));
-      element.on('mousemove', angular.bind(this, function(event) {
-        if (resizeService.isResizing) {
-          resizeService.doResize(event);
-          scope.$apply();
-        }
-      }));
+    controller: ['$scope', function($scope) {
+      console.log('Controlled');
+    }],
+    link: function() {
+      console.log('Linked');
     }
   };
 };
 
+
+/**
+ * Angular module.
+ * @type {!angular.Module}
+ */
+explorer.components.explorer.module = angular.module(
+  'p3rf.perfkit.explorer', [])
+    .directive(
+      'explorerPage', explorer.components.explorer.ExplorerPageDirective);
+    
 });  // goog.scope

@@ -38,7 +38,7 @@ class ExplorePageHandler(base.RequestHandlerBase):
 
   def get(self):
     """Request handler for GET operations."""
-    self.RenderHtml('explorer.html', {})
+    self.RenderHtml('dashboard-explorer.html', {})
 
 
 class ReviewPageHandler(base.RequestHandlerBase):
